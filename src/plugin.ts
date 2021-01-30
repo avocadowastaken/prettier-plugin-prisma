@@ -13,11 +13,6 @@ export default {
     "prisma-parse": {
       astFormat: "prisma-ast",
       parse: (text) => text,
-      preprocess: (text) => text,
-
-      hasPragma: (text) =>
-        text.startsWith("// @format") || text.startsWith("// @prettier"),
-
       locStart: () => 0,
       locEnd: (node) => node.length,
     },
