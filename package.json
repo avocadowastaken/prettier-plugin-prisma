@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "build": "esbuild src/plugin.ts --bundle --minify --outdir=dist --target=node12 --platform=node",
+    "bump": "np --no-2fa",
     "lint": "prettier . --check",
     "lint:fix": "prettier . --write",
     "tdd": "jest --watch",
@@ -20,9 +21,6 @@
     "transform": {
       ".ts": "esbuild-jest"
     }
-  },
-  "dependencies": {
-    "deasync": "^0.1.21"
   },
   "devDependencies": {
     "@prisma/sdk": "^2.15.0",
@@ -37,5 +35,9 @@
     "prettier-plugin-organize-imports": "^1.1.1",
     "prettier-plugin-packagejson": "^2.2.9",
     "typescript": "^4.1.3"
+  },
+  "peerDependencies": {
+    "@prisma/sdk": ">=2",
+    "prettier": ">=2"
   }
 }
