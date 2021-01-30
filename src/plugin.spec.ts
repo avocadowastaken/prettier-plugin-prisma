@@ -1,7 +1,7 @@
 import { readFileSync } from "fs";
 import { join as joinPath } from "path";
 import { check, format } from "prettier";
-import plugin from "./plugin";
+import * as plugin from "./plugin";
 
 const formatted = readFileSync(
   joinPath(__dirname, "__fixtures__", "formatted.prisma"),

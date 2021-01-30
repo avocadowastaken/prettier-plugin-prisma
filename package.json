@@ -10,7 +10,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "esbuild src/plugin.ts --bundle --minify --outdir=dist --target=node12 --platform=node",
+    "build": "esbuild src/plugin.ts --bundle --outdir=dist --target=node12 --platform=node",
     "bump": "np --no-2fa",
     "lint": "prettier . --check",
     "lint:fix": "prettier . --write",

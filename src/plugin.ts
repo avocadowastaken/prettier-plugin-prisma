@@ -1,7 +1,7 @@
 import { spawnSync } from "child_process";
 import { Plugin } from "prettier";
 
-export default {
+export const { languages, parsers, printers }: Plugin<string> = {
   languages: [
     {
       name: "Prisma",
@@ -9,6 +9,7 @@ export default {
       parsers: ["prisma-parse"],
     },
   ],
+
   parsers: {
     "prisma-parse": {
       astFormat: "prisma-ast",
@@ -41,4 +42,4 @@ export default {
       },
     },
   },
-} as Plugin<string>;
+};
