@@ -1,6 +1,6 @@
 {
   "name": "prettier-plugin-prisma",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Prettier plugin for Prisma files",
   "repository": "git@github.com:umidbekkarimov/prettier-plugin-prisma.git",
   "license": "MIT",
