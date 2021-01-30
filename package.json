@@ -1,11 +1,14 @@
 {
   "name": "prettier-plugin-prisma",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Prettier plugin for Prisma files",
   "repository": "git@github.com:umidbekkarimov/prettier-plugin-prisma.git",
   "license": "MIT",
   "author": "Umidbek Karimov",
-  "main": "dist/index.js",
+  "main": "dist/plugin.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "esbuild src/plugin.ts --bundle --minify --outdir=dist --target=node12 --platform=node",
     "lint": "prettier . --check",
