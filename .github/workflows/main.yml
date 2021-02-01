@@ -12,15 +12,29 @@ jobs:
       - uses: styfle/cancel-workflow-action@0.4.0
         with:
           access_token: ${{ github.token }}
+
       - uses: actions/checkout@v2
+
       - id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
+
       - uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             yarn-
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            cargo-
+
       - run: yarn install --frozen-lockfile
       - run: yarn tsc
       - run: yarn lint
