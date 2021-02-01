@@ -1,5 +1,24 @@
 import { spawnSync } from "child_process";
+import { readFileSync } from "fs";
+import { join as joinPath } from "path";
 import { Plugin } from "prettier";
+
+const wasmBin = readFileSync(
+  joinPath(
+    __dirname,
+    "..",
+    "target",
+    "wasm32-unknown-unknown",
+    "release",
+    "deps",
+    "prettier_plugin_prisma.wasm"
+  )
+);
+const wasmModule = new WebAssembly.Module(wasmBin);
+const libexample = new WebAssembly.Instance(wasmModule);
+
+let result = libexample.exports.add(10, 2);
+console.log("add result:" + result);
 
 export const { languages, parsers, printers }: Plugin<string> = {
   languages: [
