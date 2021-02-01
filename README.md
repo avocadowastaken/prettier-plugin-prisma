@@ -1,6 +1,8 @@
 # prettier-plugin-prisma
 
 ![Build](https://github.com/umidbekk/prettier-plugin-prisma/workflows/Main/badge.svg)
+[![npm version](https://img.shields.io/npm/v/prettier-plugin-prisma.svg)](https://www.npmjs.com/package/prettier-plugin-prisma)
+[![npm downloads](https://img.shields.io/npm/dm/prettier-plugin-prisma.svg)](https://www.npmjs.com/package/prettier-plugin-prisma)
 
 Prettier plugin for Prisma
 
