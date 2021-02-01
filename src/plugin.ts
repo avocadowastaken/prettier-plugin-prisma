@@ -1,5 +1,39 @@
-import { spawnSync } from "child_process";
+import { join as joinPath } from "path";
 import { Plugin } from "prettier";
+
+interface PrismaFormatter {
+  format: (input: string) => string;
+}
+
+let prismaFormatter: undefined | PrismaFormatter;
+
+function formatSchema(input: string): string {
+  if (!prismaFormatter) {
+    const formatterPath = process.env.PRISMA_FORMATTER_PATH;
+
+    if (!formatterPath) {
+      throw new Error("'PRISMA_FORMATTER_PATH' not defined");
+    }
+
+    try {
+      prismaFormatter = require(joinPath(
+        __dirname,
+        formatterPath
+      )) as PrismaFormatter;
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        (error as { code?: string }).code === "MODULE_NOT_FOUND"
+      ) {
+        throw new Error("File defined in 'PRISMA_FORMATTER_PATH' not found");
+      }
+
+      throw error;
+    }
+  }
+
+  return prismaFormatter.format(input);
+}
 
 export const { languages, parsers, printers }: Plugin<string> = {
   languages: [
@@ -21,25 +55,7 @@ export const { languages, parsers, printers }: Plugin<string> = {
 
   printers: {
     "prisma-ast": {
-      print: (path) => {
-        const { stdout, stderr } = spawnSync(
-          "node",
-          [
-            "-e",
-            "require('@prisma/sdk').formatSchema({ schema: require('fs').readFileSync(process.stdin.fd, 'utf8') }).then(console.log)",
-          ],
-          {
-            encoding: "utf8",
-            input: path.getValue(),
-          }
-        );
-
-        if (stderr) {
-          throw new Error(stderr);
-        }
-
-        return stdout;
-      },
+      print: (path) => formatSchema(path.getValue()),
     },
   },
 };
