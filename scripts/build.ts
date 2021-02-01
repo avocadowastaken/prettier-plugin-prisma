@@ -22,6 +22,10 @@ execa.sync("rustup", ["target", "add", rustTarget, "--toolchain", "stable"], {
   stdio: "inherit",
 });
 
+execa.sync("cargo", ["install", "wasm-bindgen-cli"], {
+  stdio: "inherit",
+});
+
 const formatterWasmPath = path.join(
   rootDir,
   "target",
