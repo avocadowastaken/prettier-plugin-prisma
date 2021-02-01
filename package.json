@@ -12,9 +12,9 @@
   "scripts": {
     "build": "ts-node scripts/build.ts",
     "bump": "np --no-2fa",
-    "postinstall": "yarn build",
     "lint": "prettier . --check",
     "lint:fix": "prettier . --write",
+    "pretdd": "yarn build",
     "tdd": "jest --watch",
     "test": "jest"
   },
