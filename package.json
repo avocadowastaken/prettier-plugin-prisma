@@ -27,8 +27,6 @@
     }
   },
   "devDependencies": {
-    "@prisma/sdk": "^2.15.0",
-    "@types/deasync": "^0.1.1",
     "@types/jest": "^26.0.20",
     "@types/prettier": "^2.1.6",
     "esbuild": "^0.8.37",
@@ -43,7 +41,6 @@
     "typescript": "^4.1.3"
   },
   "peerDependencies": {
-    "@prisma/sdk": ">=2",
     "prettier": ">=2"
   },
   "engines": {
