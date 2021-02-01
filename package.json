@@ -45,5 +45,8 @@
   "peerDependencies": {
     "@prisma/sdk": ">=2",
     "prettier": ">=2"
+  },
+  "engines": {
+    "node": ">=12"
   }
 }

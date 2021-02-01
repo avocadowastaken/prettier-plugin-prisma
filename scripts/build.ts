@@ -17,6 +17,11 @@ fs.mkdirSync(distDir, { recursive: true });
 //
 
 const rustTarget = "wasm32-unknown-unknown";
+
+execa.sync("rustup", ["target", "add", rustTarget, "--toolchain", "stable"], {
+  stdio: "inherit",
+});
+
 const formatterWasmPath = path.join(
   rootDir,
   "target",
