@@ -1,8 +1,9 @@
 [workspace]
+
 members = [
-    "src/rust/hostname",
-    "src/rust/prisma-formatter"
+    "rust/hostname",
+    "rust/prisma-formatter"
 ]
 
 [patch.crates-io]
-hostname = { path = "src/rust/hostname" }
+hostname = { path = "rust/hostname" }

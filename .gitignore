@@ -6,8 +6,4 @@ node_modules/
 
 # Build output
 dist
-
-
-# Added by cargo
-
-/target
+target
