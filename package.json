@@ -30,6 +30,7 @@
   "devDependencies": {
     "@types/jest": "^26.0.20",
     "@types/prettier": "^2.2.2",
+    "@types/prettier1": "npm:@types/prettier@1",
     "esbuild": "^0.9.0",
     "esbuild-jest": "^0.5.0",
     "execa": "^5.0.0",
@@ -38,6 +39,7 @@
     "prettier": "^2.2.1",
     "prettier-plugin-organize-imports": "^1.1.1",
     "prettier-plugin-packagejson": "^2.2.10",
+    "prettier1": "npm:prettier@1",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3"
   },

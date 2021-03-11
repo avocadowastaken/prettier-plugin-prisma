@@ -35,7 +35,11 @@ function formatSchema(input: string): string {
   return prismaFormatter.format(input);
 }
 
-export const { languages, parsers, printers }: Plugin<string> = {
+interface PrismaAST {
+  text: string;
+}
+
+export const { languages, parsers, printers }: Plugin<PrismaAST> = {
   languages: [
     {
       name: "Prisma",
@@ -47,15 +51,15 @@ export const { languages, parsers, printers }: Plugin<string> = {
   parsers: {
     "prisma-parse": {
       astFormat: "prisma-ast",
-      parse: (text) => text,
+      parse: (text) => ({ text }),
       locStart: () => 0,
-      locEnd: (node) => node.length,
+      locEnd: (node) => node.text.length,
     },
   },
 
   printers: {
     "prisma-ast": {
-      print: (path) => formatSchema(path.getValue()),
+      print: (path) => formatSchema(path.getValue().text),
     },
   },
 };
