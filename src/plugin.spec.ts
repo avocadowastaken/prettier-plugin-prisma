@@ -1,42 +1,44 @@
 import { readFileSync } from "fs";
 import { join as joinPath } from "path";
-import { check, format, Options } from "prettier";
-import * as Prettier1 from "prettier1";
+import { check, format } from "prettier";
 import * as plugin from "./plugin";
 
-describe.each(["v1", "v2"] as const)("prettier@%s", (version) => {
-  const options: Options = {
-    plugins: [plugin],
-    filepath: "./prisma/schema.prisma",
-  };
+const formatted = readFileSync(
+  joinPath(__dirname, "__fixtures__", "formatted.prisma"),
+  "utf8"
+);
 
-  const formatted = readFileSync(
-    joinPath(__dirname, "__fixtures__", "formatted.prisma"),
-    "utf8"
-  );
+const unformatted = readFileSync(
+  joinPath(__dirname, "__fixtures__", "unformatted.prisma"),
+  "utf8"
+);
 
-  const unformatted = readFileSync(
-    joinPath(__dirname, "__fixtures__", "unformatted.prisma"),
-    "utf8"
-  );
+test("basic", () => {
+  expect(
+    format(formatted, {
+      plugins: [plugin],
+      filepath: "./prisma/schema.prisma",
+    })
+  ).toBe(formatted);
 
-  function formatCode(input: string): string {
-    return version === "v1"
-      ? Prettier1.format(input, options as any)
-      : format(input, options);
-  }
+  expect(
+    format(unformatted, {
+      plugins: [plugin],
+      filepath: "./prisma/schema.prisma",
+    })
+  ).toBe(formatted);
 
-  function checkCode(input: string): boolean {
-    return version === "v1"
-      ? Prettier1.check(input, options as any)
-      : check(input, options);
-  }
+  expect(
+    check(formatted, {
+      plugins: [plugin],
+      filepath: "./prisma/schema.prisma",
+    })
+  ).toBe(true);
 
-  test("basic", () => {
-    expect(formatCode(formatted)).toBe(formatted);
-    expect(formatCode(unformatted)).toBe(formatted);
-
-    expect(checkCode(formatted)).toBe(true);
-    expect(checkCode(unformatted)).toBe(false);
-  });
+  expect(
+    check(unformatted, {
+      plugins: [plugin],
+      filepath: "./prisma/schema.prisma",
+    })
+  ).toBe(false);
 });
