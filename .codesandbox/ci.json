@@ -1,0 +1,6 @@
+{
+  "installCommand": "install",
+  "buildCommand": "build",
+  "packages": ["."],
+  "node": "12"
+}
