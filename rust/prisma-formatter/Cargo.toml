@@ -11,4 +11,4 @@ crate-type = ["cdylib"]
 wasm-bindgen = { version = "0.2.71" }
 getrandom = { version = "0.1.16", features = ["wasm-bindgen"] }
 uuid = { version = "0.8.2", features = ["wasm-bindgen"] }
-datamodel = { git = "https://github.com/prisma/prisma-engines", tag = "2.20.0" }
+datamodel = { git = "https://github.com/prisma/prisma-engines", tag = "2.21.0" }
