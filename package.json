@@ -2,6 +2,10 @@
   "name": "prettier-plugin-prisma",
   "version": "0.8.0",
   "description": "Prettier plugin for Prisma files",
+  "keywords": [
+    "prettier-plugin",
+    "prisma"
+  ],
   "repository": "git@github.com:umidbekkarimov/prettier-plugin-prisma.git",
   "license": "MIT",
   "author": "Umidbek Karimov",
