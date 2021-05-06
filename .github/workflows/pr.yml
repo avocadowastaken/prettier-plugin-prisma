@@ -15,7 +15,6 @@ jobs:
     steps:
       - uses: styfle/cancel-workflow-action@0.8.0
       - uses: actions/checkout@v2
-      - uses: umidbekk/actions/npm/install@v1
       - uses: actions/cache@v2
         with:
           path: |
@@ -25,7 +24,7 @@ jobs:
           key: cargo-v1-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             cargo-v1-
-
+      - uses: umidbekk/actions/npm/install@v1
       - run: yarn tsc
       - run: yarn lint
       - run: yarn test
