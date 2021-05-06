@@ -1,7 +1,9 @@
 {
-  "include": ["src"],
+  "include": ["lib", "test", "wasm", "scripts"],
   "compilerOptions": {
     "strict": true,
-    "noEmit": true
+    "noEmit": true,
+    "allowJs": true,
+    "checkJs": true
   }
 }

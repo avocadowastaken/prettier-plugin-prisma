@@ -5,6 +5,5 @@
 node_modules/
 
 # Build output
-dist/
 wasm/
 target/
