@@ -1,4 +1,3 @@
-import { join as joinPath } from "path";
 import { Plugin } from "prettier";
 
 interface PrismaFormatter {
@@ -9,17 +8,8 @@ let prismaFormatter: undefined | PrismaFormatter;
 
 function formatSchema(input: string): string {
   if (!prismaFormatter) {
-    const formatterPath = process.env.PRISMA_FORMATTER_PATH;
-
-    if (!formatterPath) {
-      throw new Error("'PRISMA_FORMATTER_PATH' not defined");
-    }
-
     try {
-      prismaFormatter = require(joinPath(
-        __dirname,
-        formatterPath
-      )) as PrismaFormatter;
+      prismaFormatter = require("../wasm/prisma_formatter.js") as PrismaFormatter;
     } catch (error) {
       if (
         error instanceof Error &&

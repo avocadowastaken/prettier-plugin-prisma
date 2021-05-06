@@ -11,7 +11,8 @@
   "author": "Umidbek Karimov",
   "main": "dist/plugin.js",
   "files": [
-    "dist"
+    "dist",
+    "wasm"
   ],
   "scripts": {
     "build": "ts-node scripts/build.ts",
@@ -24,9 +25,6 @@
     "test": "jest"
   },
   "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/setupTests.ts"
-    ],
     "transform": {
       ".ts": "esbuild-jest"
     }

@@ -2,75 +2,68 @@ import * as execa from "execa";
 import * as fs from "fs";
 import * as path from "path";
 
-const rootDir = path.join(__dirname, "..");
-const distDir = path.join(rootDir, "dist");
+const ROOT_DIR = path.join(__dirname, "..");
+const WASM_DIR = path.join(ROOT_DIR, "wasm");
+const DIST_DIR = path.join(ROOT_DIR, "dist");
+function exec(file: string, ...args: string[]): void {
+  execa.sync(file, args, { stdio: "inherit" });
+}
 
 //
 // Prepare
 //
 
-execa.sync("rimraf", [distDir], { stdio: "inherit" });
-fs.mkdirSync(distDir, { recursive: true });
+exec("rimraf", DIST_DIR, WASM_DIR);
+fs.mkdirSync(DIST_DIR, { recursive: true });
+fs.mkdirSync(WASM_DIR, { recursive: true });
 
 //
 // Build Wasm
 //
 
-const rustTarget = "wasm32-unknown-unknown";
+const RUST_TARGET = "wasm32-unknown-unknown";
 
-execa.sync("rustup", ["target", "add", rustTarget, "--toolchain", "stable"], {
-  stdio: "inherit",
-});
+exec("rustup", "target", "add", RUST_TARGET, "--toolchain", "stable");
+exec("cargo", "install", "wasm-bindgen-cli");
 
-execa.sync("cargo", ["install", "wasm-bindgen-cli"], {
-  stdio: "inherit",
-});
-
-const formatterWasmPath = path.join(
-  rootDir,
+const PRISMA_FORMATTER_WASM_PATH = path.join(
+  ROOT_DIR,
   "target",
-  rustTarget,
+  RUST_TARGET,
   "release",
   "deps",
   "prisma_formatter.wasm"
 );
 
-execa.sync(
+exec(
   "cargo",
-  ["build", "--release", `--target=${rustTarget}`, "--lib=prisma-formatter"],
-  { stdio: "inherit" }
+  "build",
+  "--release",
+  `--target=${RUST_TARGET}`,
+  "--lib=prisma-formatter"
 );
 
-execa.sync(
+exec(
   "wasm-bindgen",
-  [
-    formatterWasmPath,
-    "--no-typescript",
-    "--target",
-    "nodejs",
-    "--out-dir",
-    distDir,
-  ],
-  {
-    stdio: "inherit",
-  }
+  PRISMA_FORMATTER_WASM_PATH,
+  "--no-typescript",
+  "--target",
+  "nodejs",
+  "--out-dir",
+  WASM_DIR
 );
 
 //
 // Build JS
 //
 
-const tsEntry = path.join(rootDir, "src", "plugin.ts");
+const TS_ENTRY = path.join(ROOT_DIR, "src", "plugin.ts");
 
-execa.sync(
+exec(
   "esbuild",
-  [
-    tsEntry,
-    "--bundle",
-    "--target=node12",
-    "--platform=node",
-    `--outdir=${distDir}`,
-    `--define:process.env.PRISMA_FORMATTER_PATH="prisma_formatter.js"`,
-  ],
-  { stdio: "inherit" }
+  TS_ENTRY,
+  "--bundle",
+  "--target=node12",
+  "--platform=node",
+  `--outdir=${DIST_DIR}`
 );
