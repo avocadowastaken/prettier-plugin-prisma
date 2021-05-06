@@ -25,6 +25,7 @@ jobs:
           restore-keys: |
             cargo-v1-
       - uses: umidbekk/actions/npm/install@v1
+      - run: yarn build
       - run: yarn tsc
       - run: yarn lint
       - run: yarn test
