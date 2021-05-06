@@ -1,7 +1,10 @@
 {
-  "include": ["src"],
+  "include": ["lib", "test", "scripts"],
   "compilerOptions": {
     "strict": true,
-    "noEmit": true
+    "noEmit": true,
+    "allowJs": true,
+    "checkJs": true,
+    "noImplicitAny": false
   }
 }

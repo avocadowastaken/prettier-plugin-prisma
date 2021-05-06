@@ -1,14 +1,14 @@
-import { readFileSync } from "fs";
-import * as path from "path";
-import { check, format } from "prettier";
-import * as plugin from "./plugin";
+const fs = require("fs");
+const path = require("path");
+const { check, format } = require("prettier");
+const plugin = require("..");
 
-const FORMATTED_FIXTURE = readFileSync(
+const FORMATTED_FIXTURE = fs.readFileSync(
   path.join(__dirname, "__fixtures__", "formatted.prisma"),
   "utf8"
 );
 
-const UNFORMATTED_FIXTURE = readFileSync(
+const UNFORMATTED_FIXTURE = fs.readFileSync(
   path.join(__dirname, "__fixtures__", "unformatted.prisma"),
   "utf8"
 );
