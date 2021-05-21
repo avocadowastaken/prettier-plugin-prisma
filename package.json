@@ -15,7 +15,6 @@
     "wasm"
   ],
   "scripts": {
-    "prepare": "yarn build",
     "build": "node scripts/build.js",
     "lint": "prettier . --check",
     "lint:fix": "prettier . --write",
