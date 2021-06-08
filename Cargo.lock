@@ -148,7 +148,7 @@ dependencies = [
 [[package]]
 name = "datamodel"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines?rev=f3e341280d96d0abc068f97e959ddf01f321a858#f3e341280d96d0abc068f97e959ddf01f321a858"
+source = "git+https://github.com/prisma/prisma-engines?branch=2.24.x#18095475d5ee64536e2f93995e48ad800737a9e4"
 dependencies = [
  "bigdecimal",
  "chrono",
@@ -174,7 +174,7 @@ dependencies = [
 [[package]]
 name = "datamodel-connector"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines?rev=f3e341280d96d0abc068f97e959ddf01f321a858#f3e341280d96d0abc068f97e959ddf01f321a858"
+source = "git+https://github.com/prisma/prisma-engines?branch=2.24.x#18095475d5ee64536e2f93995e48ad800737a9e4"
 dependencies = [
  "dml",
  "itertools",
@@ -195,7 +195,7 @@ dependencies = [
 [[package]]
 name = "dml"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines?rev=f3e341280d96d0abc068f97e959ddf01f321a858#f3e341280d96d0abc068f97e959ddf01f321a858"
+source = "git+https://github.com/prisma/prisma-engines?branch=2.24.x#18095475d5ee64536e2f93995e48ad800737a9e4"
 dependencies = [
  "chrono",
  "cuid",
@@ -376,7 +376,7 @@ checksum = "b16bd47d9e329435e309c58469fe0791c2d0d1ba96ec0954152a5ae2b04387dc"
 [[package]]
 name = "mongodb-datamodel-connector"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines?rev=f3e341280d96d0abc068f97e959ddf01f321a858#f3e341280d96d0abc068f97e959ddf01f321a858"
+source = "git+https://github.com/prisma/prisma-engines?branch=2.24.x#18095475d5ee64536e2f93995e48ad800737a9e4"
 dependencies = [
  "datamodel-connector",
  "dml",
@@ -389,7 +389,7 @@ dependencies = [
 [[package]]
 name = "native-types"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines?rev=f3e341280d96d0abc068f97e959ddf01f321a858#f3e341280d96d0abc068f97e959ddf01f321a858"
+source = "git+https://github.com/prisma/prisma-engines?branch=2.24.x#18095475d5ee64536e2f93995e48ad800737a9e4"
 dependencies = [
  "serde",
  "serde_json",
@@ -534,7 +534,7 @@ dependencies = [
 [[package]]
 name = "prisma-value"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines?rev=f3e341280d96d0abc068f97e959ddf01f321a858#f3e341280d96d0abc068f97e959ddf01f321a858"
+source = "git+https://github.com/prisma/prisma-engines?branch=2.24.x#18095475d5ee64536e2f93995e48ad800737a9e4"
 dependencies = [
  "base64",
  "bigdecimal",
@@ -694,7 +694,7 @@ checksum = "fe0f37c9e8f3c5a4a66ad655a93c74daac4ad00c441533bf5c6e7990bb42604e"
 [[package]]
 name = "sql-datamodel-connector"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines?rev=f3e341280d96d0abc068f97e959ddf01f321a858#f3e341280d96d0abc068f97e959ddf01f321a858"
+source = "git+https://github.com/prisma/prisma-engines?branch=2.24.x#18095475d5ee64536e2f93995e48ad800737a9e4"
 dependencies = [
  "datamodel-connector",
  "dml",
