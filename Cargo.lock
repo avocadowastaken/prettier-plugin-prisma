@@ -216,10 +216,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "hostname"
-version = "0.1.5"
-
-[[package]]
 name = "idna"
 version = "0.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
