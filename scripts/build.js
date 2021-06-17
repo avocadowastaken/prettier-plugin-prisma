@@ -57,4 +57,28 @@ function exec(file, ...args) {
     "--out-dir",
     WASM_DIR
   );
+
+  // Patch types
+  {
+    const bridgePath = path.join(WASM_DIR, "prisma_formatter.js");
+    const lines = fs.readFileSync(bridgePath, "utf8").split("\n");
+
+    /**
+     * @type {Array<[line: string, replacements: string[]]>}
+     */
+    const patches = [
+      [
+        "let imports = {};",
+        ["/** @type {WebAssembly.Imports} */", "let imports = {};"],
+      ],
+    ];
+
+    for (const [line, replacements] of patches) {
+      const indexOfLine = lines.indexOf(line);
+      if (indexOfLine === -1) throw new Error(`Line not found: ${line}`);
+      lines.splice(indexOfLine, 1, ...replacements);
+    }
+
+    fs.writeFileSync(bridgePath, lines.join("\n"), "utf8");
+  }
 }
