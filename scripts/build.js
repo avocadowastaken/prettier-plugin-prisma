@@ -29,7 +29,13 @@ function exec(file, ...args) {
   const RUST_TARGET = "wasm32-unknown-unknown";
 
   exec("rustup", "target", "add", RUST_TARGET, "--toolchain", "stable");
-  exec("cargo", "install", "wasm-bindgen-cli");
+  exec(
+    "cargo",
+    "install",
+    "wasm-bindgen-cli",
+    "--git=https://github.com/umidbekk/wasm-bindgen",
+    "--branch=fix-imports"
+  );
 
   const PRISMA_FORMATTER_WASM_PATH = path.join(
     ROOT_DIR,
@@ -57,28 +63,4 @@ function exec(file, ...args) {
     "--out-dir",
     WASM_DIR
   );
-
-  // Patch types
-  {
-    const bridgePath = path.join(WASM_DIR, "prisma_formatter.js");
-    const lines = fs.readFileSync(bridgePath, "utf8").split("\n");
-
-    /**
-     * @type {Array<[line: string, replacements: string[]]>}
-     */
-    const patches = [
-      [
-        "let imports = {};",
-        ["/** @type {WebAssembly.Imports} */", "let imports = {};"],
-      ],
-    ];
-
-    for (const [line, replacements] of patches) {
-      const indexOfLine = lines.indexOf(line);
-      if (indexOfLine === -1) throw new Error(`Line not found: ${line}`);
-      lines.splice(indexOfLine, 1, ...replacements);
-    }
-
-    fs.writeFileSync(bridgePath, lines.join("\n"), "utf8");
-  }
 }

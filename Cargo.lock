@@ -648,8 +648,7 @@ checksum = "1a143597ca7c7793eff794def352d41792a93c481eb1042423ff7ff72ba2c31f"
 [[package]]
 name = "wasm-bindgen"
 version = "0.2.74"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d54ee1d4ed486f78874278e63e4069fc1ab9f6a18ca492076ffb90c5eb2997fd"
+source = "git+https://github.com/umidbekk/wasm-bindgen?branch=fix-imports#57306b74ea59e14b909edb2f4b42cb990a6a5c3e"
 dependencies = [
  "cfg-if",
  "wasm-bindgen-macro",
@@ -658,8 +657,7 @@ dependencies = [
 [[package]]
 name = "wasm-bindgen-backend"
 version = "0.2.74"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3b33f6a0694ccfea53d94db8b2ed1c3a8a4c86dd936b13b9f0a15ec4a451b900"
+source = "git+https://github.com/umidbekk/wasm-bindgen?branch=fix-imports#57306b74ea59e14b909edb2f4b42cb990a6a5c3e"
 dependencies = [
  "bumpalo",
  "lazy_static",
@@ -673,8 +671,7 @@ dependencies = [
 [[package]]
 name = "wasm-bindgen-macro"
 version = "0.2.74"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "088169ca61430fe1e58b8096c24975251700e7b1f6fd91cc9d59b04fb9b18bd4"
+source = "git+https://github.com/umidbekk/wasm-bindgen?branch=fix-imports#57306b74ea59e14b909edb2f4b42cb990a6a5c3e"
 dependencies = [
  "quote",
  "wasm-bindgen-macro-support",
@@ -683,8 +680,7 @@ dependencies = [
 [[package]]
 name = "wasm-bindgen-macro-support"
 version = "0.2.74"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "be2241542ff3d9f241f5e2cb6dd09b37efe786df8851c54957683a49f0987a97"
+source = "git+https://github.com/umidbekk/wasm-bindgen?branch=fix-imports#57306b74ea59e14b909edb2f4b42cb990a6a5c3e"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -696,8 +692,7 @@ dependencies = [
 [[package]]
 name = "wasm-bindgen-shared"
 version = "0.2.74"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d7cff876b8f18eed75a66cf49b65e7f967cb354a7aa16003fb55dbfd25b44b4f"
+source = "git+https://github.com/umidbekk/wasm-bindgen?branch=fix-imports#57306b74ea59e14b909edb2f4b42cb990a6a5c3e"
 
 [[package]]
 name = "winapi"
