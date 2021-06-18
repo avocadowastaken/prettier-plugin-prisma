@@ -12,7 +12,8 @@
   "main": "lib/plugin.js",
   "files": [
     "lib",
-    "wasm"
+    "wasm",
+    "!wasm/*.ts"
   ],
   "scripts": {
     "build": "node scripts/build.js",
