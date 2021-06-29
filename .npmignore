@@ -1,0 +1,4 @@
+*
+!lib
+!wasm/*.js
+!wasm/*.wasm
