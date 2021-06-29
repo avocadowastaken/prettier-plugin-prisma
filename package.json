@@ -19,7 +19,7 @@
     "build": "node scripts/build.js",
     "lint": "prettier . --check",
     "lint:fix": "prettier . --write",
-    "prerelease": "yarn lint && yarn build",
+    "prerelease": "yarn lint && yarn tsc && yarn build",
     "release": "np --no-2fa",
     "pretdd": "yarn build",
     "tdd": "jest --watch",
