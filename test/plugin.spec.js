@@ -42,3 +42,99 @@ test("basic", () => {
     })
   ).toBe(false);
 });
+
+test("markdown", () => {
+  expect(
+    format(
+      ["### Example 1", "```prisma", UNFORMATTED_FIXTURE, "```"].join("\n"),
+      {
+        plugins: [plugin],
+        filepath: "./README.md",
+      }
+    )
+  ).toMatchInlineSnapshot(`
+    "### Example 1
+
+    \`\`\`prisma
+    generator client {
+      provider = \\"prisma-client-js\\"
+    }
+
+    datasource db {
+      provider = \\"postgresql\\"
+      url      = env(\\"DATABASE_URL\\")
+    }
+
+    model Post {
+      id        Int      @id @default(autoincrement())
+      createdAt DateTime @default(now())
+      title     String
+      content   String?
+      published Boolean  @default(false)
+      User      User     @relation(fields: [authorId], references: [id])
+      authorId  Int
+    }
+
+    model Profile {
+      id     Int     @id @default(autoincrement())
+      bio    String?
+      User   User    @relation(fields: [userId], references: [id])
+      userId Int     @unique
+    }
+
+    model User {
+      id      Int      @id @default(autoincrement())
+      email   String   @unique
+      name    String?
+      Post    Post[]
+      Profile Profile?
+    }
+    \`\`\`
+    "
+  `);
+
+  expect(
+    format(["### Example 1", "```", UNFORMATTED_FIXTURE, "```"].join("\n"), {
+      plugins: [plugin],
+      filepath: "./README.md",
+    })
+  ).toMatchInlineSnapshot(`
+    "### Example 1
+
+    \`\`\`
+    generator client {
+     provider=\\"prisma-client-js\\"
+    }
+
+    datasource db {
+        provider = \\"postgresql\\"
+        url    =    env(\\"DATABASE_URL\\")
+    }
+    model Post {
+    id Int @default(autoincrement()) @id
+    createdAt DateTime @default(now())
+    title String
+    content String?
+    published Boolean @default(false)
+    User User @relation(fields: [authorId], references: [id])
+    authorId Int
+    }
+
+    model Profile {
+    id Int @default(autoincrement()) @id
+    bio String?
+    User User @relation(fields: [userId], references: [id])
+    userId Int @unique
+    }
+
+    model User {
+    id Int @default(autoincrement()) @id
+    email String @unique
+    name String?
+    Post Post[]
+    Profile Profile?
+    }
+    \`\`\`
+    "
+  `);
+});
