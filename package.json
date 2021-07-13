@@ -21,8 +21,8 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.23",
-    "@types/prettier": "^2.3.1",
+    "@types/jest": "^26.0.24",
+    "@types/prettier": "^2.3.2",
     "execa": "^5.1.1",
     "jest": "^27.0.6",
     "np": "^7.5.0",
