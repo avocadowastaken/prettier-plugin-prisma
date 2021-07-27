@@ -6,17 +6,16 @@
     "prettier-plugin",
     "prisma"
   ],
-  "repository": "git@github.com:umidbekkarimov/prettier-plugin-prisma.git",
+  "repository": "git@github.com:umidbekk/prettier-plugin-prisma.git",
   "license": "MIT",
   "author": "Umidbek Karimov",
   "main": "lib/plugin.js",
   "scripts": {
     "build": "node scripts/build.js",
     "lint": "prettier . --check",
-    "lint:fix": "prettier . --write",
-    "prerelease": "yarn lint && yarn tsc && yarn build",
+    "prerelease": "npm run lint && npx tsc && npm run build",
     "release": "np --no-2fa",
-    "pretdd": "yarn build",
+    "pretdd": "npm run build",
     "tdd": "jest --watch",
     "test": "jest"
   },

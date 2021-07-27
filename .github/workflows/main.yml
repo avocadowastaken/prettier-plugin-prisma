@@ -6,7 +6,7 @@ on:
       - main
   pull_request:
     branches:
-      - "**"
+      - main
 
 env:
   CARGO_INCREMENTAL: 0
@@ -27,7 +27,7 @@ jobs:
           restore-keys: |
             cargo-v1-
       - uses: umidbekk/actions/npm/install@v1
-      - run: yarn build
-      - run: yarn tsc
-      - run: yarn lint
-      - run: yarn test
+      - run: npm run build
+      - run: npx tsc
+      - run: npm run lint
+      - run: npm test
