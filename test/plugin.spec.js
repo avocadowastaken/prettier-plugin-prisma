@@ -46,7 +46,7 @@ test("basic", () => {
 test("markdown", () => {
   expect(
     format(
-      ["### Example 1", "```prisma", UNFORMATTED_FIXTURE, "```"].join("\n"),
+      ["### Example 1", "```prisma", FORMATTED_FIXTURE, "```"].join("\n"),
       {
         plugins: [plugin],
         filepath: "./README.md",

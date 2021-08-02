@@ -8,26 +8,47 @@ on:
     branches:
       - main
 
-env:
-  CARGO_INCREMENTAL: 0
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: styfle/cancel-workflow-action@0.9.0
       - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            target
-          key: cargo-v1-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            cargo-v1-
+      - uses: Swatinem/rust-cache@v1
       - uses: umidbekk/actions/npm/install@v1
+      - run: npm run lint
       - run: npm run build
       - run: npx tsc
-      - run: npm run lint
+      - uses: actions/upload-artifact@v2
+        with:
+          name: wasm
+          path: ./wasm
+
+  tests:
+    needs: build
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [12, 14, 16]
+
+    steps:
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v2
+      - uses: umidbekk/actions/npm/install@v1
+        with:
+          cache-key: npm-${{ matrix.os }}-${{ matrix.node }}-
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: wasm
+          path: ./wasm
+
       - run: npm test
