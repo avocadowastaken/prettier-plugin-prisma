@@ -1,14 +1,15 @@
-name: Auto-Merge
-on:
-  pull_request_target:
-    types: [labeled]
+name: Dependabot auto-merge
+on: pull_request_target
+
+permissions:
+  pull-requests: write
+  contents: write
 
 jobs:
-  enable-auto-merge:
+  dependabot:
     runs-on: ubuntu-latest
-
-    if: github.event.pull_request.user.login == 'dependabot[bot]' && contains(github.event.pull_request.labels.*.name, 'dependencies')
+    if: github.actor == 'dependabot[bot]'
     steps:
-      - uses: alexwilson/enable-github-automerge-action@main
-        with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - run: gh pr merge --auto --squash "${{ github.event.pull_request.html_url }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
