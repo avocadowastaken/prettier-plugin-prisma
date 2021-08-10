@@ -3,3 +3,6 @@
 members = [
     "rust/prisma-formatter"
 ]
+
+[profile.release]
+lto = true
