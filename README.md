@@ -1,4 +1,4 @@
-# Prettier plugin for Prisma
+# Prettier plugin for [Prisma](https://github.com/prisma/prisma)
 
 [![Main](https://github.com/umidbekk/prettier-plugin-prisma/actions/workflows/main.yml/badge.svg)](https://github.com/umidbekk/prettier-plugin-prisma/actions/workflows/main.yml)
 [![install size](https://packagephobia.com/badge?p=prettier-plugin-prisma)](https://packagephobia.com/result?p=prettier-plugin-prisma)
