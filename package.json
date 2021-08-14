@@ -18,7 +18,7 @@
   "scripts": {
     "build": "node scripts/build.js",
     "lint": "prettier . --check",
-    "prerelease": "npm run lint && npx tsc && npm run build",
+    "prerelease": "npm ddp && npm i && npm run lint && npx tsc && npm run build",
     "release": "np --no-2fa",
     "pretdd": "npm run build",
     "tdd": "jest --watch",
