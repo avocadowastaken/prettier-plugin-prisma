@@ -1,6 +1,6 @@
 {
   "name": "prettier-plugin-prisma",
-  "version": "2.29.0",
+  "version": "2.29.1",
   "description": "Prettier plugin for Prisma files",
   "keywords": [
     "prettier-plugin",
