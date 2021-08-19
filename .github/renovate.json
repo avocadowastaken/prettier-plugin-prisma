@@ -1,11 +1,10 @@
 {
-  "extends": ["config:js-lib", "group:all"],
-  "lockFileMaintenance": { "enabled": true, "automerge": true },
-  "postUpdateOptions": ["npmDedupe"],
-  "packageRules": [
-    {
-      "automerge": true,
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"]
-    }
-  ]
+  "extends": [
+    "config:js-lib",
+    "group:all",
+    "schedule:earlyMondays",
+    ":automergeAll",
+    ":maintainLockFilesWeekly"
+  ],
+  "postUpdateOptions": ["npmDedupe"]
 }
