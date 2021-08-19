@@ -4,6 +4,7 @@
     "group:all",
     "schedule:earlyMondays",
     ":automergeAll",
+    ":dependencyDashboard",
     ":maintainLockFilesWeekly"
   ],
   "postUpdateOptions": ["npmDedupe"]
