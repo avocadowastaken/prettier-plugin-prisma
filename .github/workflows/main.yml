@@ -48,13 +48,15 @@ jobs:
         node: [12, 14, 16]
 
     steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v2
+
       - uses: actions/setup-node@v2
         with:
           cache: "npm"
           node-version: ${{ matrix.node }}
-      - run: git config --global core.autocrlf false
-      - uses: actions/checkout@v2
       - run: npm ci
+
       - uses: actions/download-artifact@v2
         with:
           name: wasm
