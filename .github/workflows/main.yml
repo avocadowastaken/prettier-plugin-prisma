@@ -15,7 +15,11 @@ jobs:
       - uses: styfle/cancel-workflow-action@0.9.1
       - uses: actions/checkout@v2
       - uses: Swatinem/rust-cache@v1
-      - uses: umidbekk/actions/npm/install@v1
+      - uses: actions/setup-node@v2
+        with:
+          cache: 'npm'
+          node-version: '14'
+      - run: npm ci
       - run: npm run lint
       - run: npm run build
       - run: npx tsc
@@ -38,17 +42,13 @@ jobs:
     steps:
       - uses: actions/setup-node@v2
         with:
+          cache: 'npm'
           node-version: ${{ matrix.node }}
-
       - run: git config --global core.autocrlf false
       - uses: actions/checkout@v2
-      - uses: umidbekk/actions/npm/install@v1
-        with:
-          cache-key: npm-${{ matrix.os }}-${{ matrix.node }}-
-
+      - run: npm ci
       - uses: actions/download-artifact@v2
         with:
           name: wasm
           path: ./wasm
-
       - run: npm test
