@@ -18,7 +18,7 @@
   "scripts": {
     "build": "node scripts/build.js",
     "lint": "prettier . --check",
-    "prerelease": "npm ddp && npm i && npm run lint && npx tsc && npm run build",
+    "prerelease": "npm i && npm run lint && npx tsc && npm run build",
     "release": "np --no-2fa",
     "pretdd": "npm run build",
     "tdd": "jest --watch",
@@ -26,8 +26,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*": "prettier --write --ignore-unknown",
-    "package-lock.json": "npm ddp"
+    "*": "prettier --write --ignore-unknown"
   },
   "devDependencies": {
     "@types/jest": "27.0.1",
