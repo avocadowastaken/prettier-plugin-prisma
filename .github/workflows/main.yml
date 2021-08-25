@@ -17,8 +17,8 @@ jobs:
       - uses: Swatinem/rust-cache@v1
       - uses: actions/setup-node@v2
         with:
-          cache: 'npm'
-          node-version: '14'
+          cache: "npm"
+          node-version: "14"
       - run: npm ci
       - run: npm run lint
       - run: npm run build
@@ -42,7 +42,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v2
         with:
-          cache: 'npm'
+          cache: "npm"
           node-version: ${{ matrix.node }}
       - run: git config --global core.autocrlf false
       - uses: actions/checkout@v2
