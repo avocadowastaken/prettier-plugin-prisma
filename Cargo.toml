@@ -1,8 +1,15 @@
-[workspace]
+[package]
+name = "prisma-formatter"
+version = "0.1.0"
+authors = ["Umidbek Karimov"]
+edition = "2018"
 
-members = [
-    "rust/prisma-formatter"
-]
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = { version = "0.2.75" }
+datamodel = { git = "https://github.com/prisma/prisma-engines", tag = "3.0.1" }
 
 [profile.release]
 lto = true
