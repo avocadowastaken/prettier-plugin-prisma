@@ -8,7 +8,7 @@ edition = "2018"
 crate-type = ["cdylib"]
 
 [dependencies]
-wasm-bindgen = { version = "0.2.75" }
+wasm-bindgen = { version = "0.2.78" }
 datamodel = { git = "https://github.com/prisma/prisma-engines", tag = "3.0.1" }
 
 [profile.release]

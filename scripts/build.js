@@ -17,7 +17,7 @@ function exec(file, ...args) {
 const RUST_TARGET = "wasm32-unknown-unknown";
 
 exec("rustup", "target", "add", RUST_TARGET, "--toolchain", "stable");
-exec("cargo", "install", "wasm-bindgen-cli");
+exec("cargo", "install", "--version", "0.2.78", "wasm-bindgen-cli");
 
 const PRISMA_FORMATTER_WASM_PATH = path.join(
   ROOT_DIR,
