@@ -1,11 +1,3 @@
 {
-  "extends": [
-    "config:js-lib",
-    "group:all",
-    "schedule:earlyMondays",
-    ":automergeAll",
-    ":dependencyDashboard",
-    ":maintainLockFilesWeekly"
-  ],
-  "postUpdateOptions": ["npmDedupe"]
+  "extends": ["github>umidbekk/configs:renovate"]
 }
