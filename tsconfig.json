@@ -1,10 +1,4 @@
 {
-  "include": ["lib", "test", "scripts"],
-  "compilerOptions": {
-    "strict": true,
-    "noEmit": true,
-    "allowJs": true,
-    "checkJs": true,
-    "noImplicitAny": false
-  }
+  "extends": "@umidbekk/configs/tsconfig.json",
+  "include": ["lib", "test", "scripts"]
 }
