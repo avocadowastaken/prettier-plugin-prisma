@@ -12,9 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: styfle/cancel-workflow-action@0.9.1
-
-      - uses: actions/checkout@v2
+      - uses: umidbekk/actions/prepare-node-repo@v2
 
       - uses: actions-rs/toolchain@v1
         with:
@@ -22,15 +20,10 @@ jobs:
           toolchain: stable
       - uses: Swatinem/rust-cache@v1
 
-      - uses: actions/setup-node@v2
-        with:
-          cache: "npm"
-          node-version: "14"
-      - run: npm ci
-
       - run: npm run lint
       - run: npm run build
       - run: npx tsc
+
       - uses: actions/upload-artifact@v2
         with:
           name: wasm
@@ -48,17 +41,13 @@ jobs:
         node: [12, 14, 16]
 
     steps:
-      - run: git config --global core.autocrlf false
-      - uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v2
+      - uses: umidbekk/actions/prepare-node-repo@v2
         with:
-          cache: "npm"
           node-version: ${{ matrix.node }}
-      - run: npm ci
 
       - uses: actions/download-artifact@v2
         with:
           name: wasm
           path: ./wasm
+
       - run: npm test
