@@ -29,12 +29,12 @@
     "*": "prettier --write --ignore-unknown"
   },
   "devDependencies": {
-    "@types/jest": "27.0.2",
+    "@types/jest": "27.0.3",
     "@types/prettier": "2.4.1",
     "@umidbekk/configs": "0.1.0",
     "execa": "5.1.1",
     "husky": "7.0.4",
-    "jest": "27.3.1",
+    "jest": "27.4.2",
     "lint-staged": "11.2.6",
     "np": "7.5.0",
     "prettier": "2.4.1",
