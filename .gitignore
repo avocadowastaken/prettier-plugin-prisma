@@ -3,7 +3,3 @@
 
 # Dependency directories
 node_modules/
-
-# Build output
-wasm/
-target/

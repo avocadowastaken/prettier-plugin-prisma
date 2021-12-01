@@ -11,35 +11,33 @@
   "author": "Umidbek Karimov",
   "main": "lib/plugin.js",
   "files": [
-    "lib",
-    "wasm",
-    "!wasm/*.ts"
+    "lib"
   ],
   "scripts": {
-    "build": "node scripts/build.js",
     "lint": "prettier . --check",
     "prepare": "husky install",
-    "prerelease": "npm i && npm run lint && npx tsc && npm run build",
+    "prerelease": "npm i && npm run lint && npx tsc",
     "release": "np --no-2fa",
-    "pretdd": "npm run build",
     "tdd": "jest --watch",
     "test": "jest"
   },
   "lint-staged": {
     "*": "prettier --write --ignore-unknown"
   },
+  "dependencies": {
+    "@prisma/prisma-fmt-wasm": "3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727"
+  },
   "devDependencies": {
     "@types/jest": "27.0.3",
-    "@types/prettier": "2.4.1",
+    "@types/prettier": "2.4.2",
     "@umidbekk/configs": "0.1.0",
-    "execa": "5.1.1",
     "husky": "7.0.4",
-    "jest": "27.4.2",
-    "lint-staged": "11.2.6",
-    "np": "7.5.0",
-    "prettier": "2.4.1",
+    "jest": "27.4.3",
+    "lint-staged": "12.1.2",
+    "np": "7.6.0",
+    "prettier": "2.5.0",
     "prettier-plugin-packagejson": "2.2.15",
-    "typescript": "4.4.4"
+    "typescript": "4.5.2"
   },
   "peerDependencies": {
     "prettier": ">=2"

@@ -9,29 +9,15 @@ on:
       - main
 
 jobs:
-  build:
+  checks:
     runs-on: ubuntu-latest
     steps:
       - uses: umidbekk/actions/prepare-node-repo@v2
 
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-      - uses: Swatinem/rust-cache@v1
-
       - run: npm run lint
-      - run: npm run build
       - run: npx tsc
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: wasm
-          path: ./wasm
-
   tests:
-    needs: build
-
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -44,10 +30,5 @@ jobs:
       - uses: umidbekk/actions/prepare-node-repo@v2
         with:
           node-version: ${{ matrix.node }}
-
-      - uses: actions/download-artifact@v2
-        with:
-          name: wasm
-          path: ./wasm
 
       - run: npm test
