@@ -25,19 +25,19 @@
     "*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
-    "@prisma/prisma-fmt-wasm": "3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727"
+    "@prisma/prisma-fmt-wasm": "3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f"
   },
   "devDependencies": {
     "@types/jest": "27.0.3",
     "@types/prettier": "2.4.2",
     "@umidbekk/configs": "0.1.0",
     "husky": "7.0.4",
-    "jest": "27.4.3",
-    "lint-staged": "12.1.2",
+    "jest": "27.4.5",
+    "lint-staged": "12.1.3",
     "np": "7.6.0",
     "prettier": "2.5.1",
     "prettier-plugin-packagejson": "2.2.15",
-    "typescript": "4.5.2"
+    "typescript": "4.5.4"
   },
   "peerDependencies": {
     "prettier": ">=2"
