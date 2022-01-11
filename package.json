@@ -17,7 +17,7 @@
     "lint": "prettier . --check",
     "prepare": "husky install",
     "prerelease": "npm ci && npm run lint && npx tsc",
-    "release": "np --no-2fa",
+    "release": "np",
     "tdd": "jest --watch",
     "test": "jest"
   },
