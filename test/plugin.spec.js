@@ -2,11 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { check, format } = require("prettier");
 const plugin = require("..");
-
-const FORMATTED_FIXTURE = fs.readFileSync(
-  path.join(__dirname, "__fixtures__", "formatted.prisma"),
-  "utf8"
-);
+const registerRawSnapshot = require("../test/__testutils__/rawSerializer");
 
 const UNFORMATTED_FIXTURE = fs.readFileSync(
   path.join(__dirname, "__fixtures__", "unformatted.prisma"),
@@ -14,26 +10,49 @@ const UNFORMATTED_FIXTURE = fs.readFileSync(
 );
 
 test("basic", () => {
-  expect(
-    format(FORMATTED_FIXTURE, {
-      plugins: [plugin],
-      filepath: "./prisma/schema.prisma",
-    })
-  ).toBe(FORMATTED_FIXTURE);
+  const formatted = format(UNFORMATTED_FIXTURE, {
+    plugins: [plugin],
+    filepath: "./prisma/schema.prisma",
+  });
 
-  expect(
-    format(UNFORMATTED_FIXTURE, {
-      plugins: [plugin],
-      filepath: "./prisma/schema.prisma",
-    })
-  ).toBe(FORMATTED_FIXTURE);
+  registerRawSnapshot(formatted);
 
-  expect(
-    check(FORMATTED_FIXTURE, {
-      plugins: [plugin],
-      filepath: "./prisma/schema.prisma",
-    })
-  ).toBe(true);
+  expect(formatted).toMatchInlineSnapshot(`
+    generator client {
+      provider = "prisma-client-js"
+    }
+
+    datasource db {
+      provider = "postgresql"
+      url      = env("DATABASE_URL")
+    }
+
+    model Post {
+      id        Int      @id @default(autoincrement())
+      createdAt DateTime @default(now())
+      title     String
+      content   String?
+      published Boolean  @default(false)
+      User      User     @relation(fields: [authorId], references: [id])
+      authorId  Int
+    }
+
+    model Profile {
+      id     Int     @id @default(autoincrement())
+      bio    String?
+      User   User    @relation(fields: [userId], references: [id])
+      userId Int     @unique
+    }
+
+    model User {
+      id      Int      @id @default(autoincrement())
+      email   String   @unique
+      name    String?
+      Post    Post[]
+      Profile Profile?
+    }
+
+  `);
 
   expect(
     check(UNFORMATTED_FIXTURE, {
@@ -41,28 +60,38 @@ test("basic", () => {
       filepath: "./prisma/schema.prisma",
     })
   ).toBe(false);
+
+  expect(
+    check(formatted, { plugins: [plugin], filepath: "./prisma/schema.prisma" })
+  ).toBe(true);
+
+  expect(
+    format(formatted, {
+      plugins: [plugin],
+      filepath: "./prisma/schema.prisma",
+    })
+  ).toBe(formatted);
 });
 
 test("markdown", () => {
-  expect(
-    format(
-      ["### Example 1", "```prisma", FORMATTED_FIXTURE, "```"].join("\n"),
-      {
-        plugins: [plugin],
-        filepath: "./README.md",
-      }
-    )
-  ).toMatchInlineSnapshot(`
-    "### Example 1
+  const fromFormatted = format(
+    ["### Example 1", "```prisma", UNFORMATTED_FIXTURE, "```"].join("\n"),
+    { plugins: [plugin], filepath: "./README.md" }
+  );
+
+  registerRawSnapshot(fromFormatted);
+
+  expect(fromFormatted).toMatchInlineSnapshot(`
+    ### Example 1
 
     \`\`\`prisma
     generator client {
-      provider = \\"prisma-client-js\\"
+      provider = "prisma-client-js"
     }
 
     datasource db {
-      provider = \\"postgresql\\"
-      url      = env(\\"DATABASE_URL\\")
+      provider = "postgresql"
+      url      = env("DATABASE_URL")
     }
 
     model Post {
@@ -90,51 +119,54 @@ test("markdown", () => {
       Profile Profile?
     }
     \`\`\`
-    "
+
   `);
 
-  expect(
-    format(["### Example 1", "```", UNFORMATTED_FIXTURE, "```"].join("\n"), {
-      plugins: [plugin],
-      filepath: "./README.md",
-    })
-  ).toMatchInlineSnapshot(`
-    "### Example 1
+  const fromUnformatted = format(
+    ["### Example 1", "```prisma", UNFORMATTED_FIXTURE, "```"].join("\n"),
+    { plugins: [plugin], filepath: "./README.md" }
+  );
 
-    \`\`\`
+  registerRawSnapshot(fromUnformatted);
+
+  expect(fromUnformatted).toMatchInlineSnapshot(`
+    ### Example 1
+
+    \`\`\`prisma
     generator client {
-     provider=\\"prisma-client-js\\"
+      provider = "prisma-client-js"
     }
 
     datasource db {
-        provider = \\"postgresql\\"
-        url    =    env(\\"DATABASE_URL\\")
+      provider = "postgresql"
+      url      = env("DATABASE_URL")
     }
+
     model Post {
-    id Int @default(autoincrement()) @id
-    createdAt DateTime @default(now())
-    title String
-    content String?
-    published Boolean @default(false)
-    User User @relation(fields: [authorId], references: [id])
-    authorId Int
+      id        Int      @id @default(autoincrement())
+      createdAt DateTime @default(now())
+      title     String
+      content   String?
+      published Boolean  @default(false)
+      User      User     @relation(fields: [authorId], references: [id])
+      authorId  Int
     }
 
     model Profile {
-    id Int @default(autoincrement()) @id
-    bio String?
-    User User @relation(fields: [userId], references: [id])
-    userId Int @unique
+      id     Int     @id @default(autoincrement())
+      bio    String?
+      User   User    @relation(fields: [userId], references: [id])
+      userId Int     @unique
     }
 
     model User {
-    id Int @default(autoincrement()) @id
-    email String @unique
-    name String?
-    Post Post[]
-    Profile Profile?
+      id      Int      @id @default(autoincrement())
+      email   String   @unique
+      name    String?
+      Post    Post[]
+      Profile Profile?
     }
     \`\`\`
-    "
+
   `);
 });
