@@ -16,7 +16,7 @@
   "scripts": {
     "lint": "prettier . --check",
     "prepare": "husky install",
-    "prerelease": "npm i && npm run lint && npx tsc",
+    "prerelease": "npm ci && npm run lint && npx tsc",
     "release": "np --no-2fa",
     "tdd": "jest --watch",
     "test": "jest"
@@ -25,15 +25,15 @@
     "*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
-    "@prisma/prisma-fmt-wasm": "3.7.0-31.8746e055198f517658c08a0c426c7eec87f5a85f"
+    "@prisma/prisma-fmt-wasm": "3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f"
   },
   "devDependencies": {
-    "@types/jest": "27.0.3",
+    "@types/jest": "27.4.0",
     "@types/prettier": "2.4.2",
     "@umidbekk/configs": "0.1.0",
     "husky": "7.0.4",
-    "jest": "27.4.5",
-    "lint-staged": "12.1.4",
+    "jest": "27.4.7",
+    "lint-staged": "12.1.7",
     "np": "7.6.0",
     "prettier": "2.5.1",
     "prettier-plugin-packagejson": "2.2.15",
