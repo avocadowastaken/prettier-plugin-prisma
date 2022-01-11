@@ -14,3 +14,7 @@ npm i -D prettier-plugin-prisma
 # or with yarn
 yarn add -D prettier-plugin-prisma
 ```
+
+### Supported options
+
+- Tab width: https://prettier.io/docs/en/options.html#tab-width

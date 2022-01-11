@@ -9,13 +9,21 @@ const UNFORMATTED_FIXTURE = fs.readFileSync(
   "utf8"
 );
 
-test("basic", () => {
-  const formatted = format(UNFORMATTED_FIXTURE, {
-    plugins: [plugin],
-    filepath: "./prisma/schema.prisma",
-  });
-
+/**
+ * @param {string} text
+ * @param {Omit<import("prettier").Options, "plugins">} [options]
+ */
+function formatWithPlugin(
+  text,
+  { filepath = "./prisma/schema.prisma", ...options } = {}
+) {
+  const formatted = format(text, { ...options, filepath, plugins: [plugin] });
   registerRawSnapshot(formatted);
+  return formatted;
+}
+
+test("basic", () => {
+  const formatted = formatWithPlugin(UNFORMATTED_FIXTURE);
 
   expect(formatted).toMatchInlineSnapshot(`
     generator client {
@@ -65,23 +73,16 @@ test("basic", () => {
     check(formatted, { plugins: [plugin], filepath: "./prisma/schema.prisma" })
   ).toBe(true);
 
-  expect(
-    format(formatted, {
-      plugins: [plugin],
-      filepath: "./prisma/schema.prisma",
-    })
-  ).toBe(formatted);
+  expect(formatWithPlugin(formatted)).toBe(formatted);
 });
 
 test("markdown", () => {
-  const fromFormatted = format(
-    ["### Example 1", "```prisma", UNFORMATTED_FIXTURE, "```"].join("\n"),
-    { plugins: [plugin], filepath: "./README.md" }
-  );
-
-  registerRawSnapshot(fromFormatted);
-
-  expect(fromFormatted).toMatchInlineSnapshot(`
+  expect(
+    formatWithPlugin(
+      ["### Example 1", "```prisma", UNFORMATTED_FIXTURE, "```"].join("\n"),
+      { filepath: "./README.md" }
+    )
+  ).toMatchInlineSnapshot(`
     ### Example 1
 
     \`\`\`prisma
@@ -122,14 +123,12 @@ test("markdown", () => {
 
   `);
 
-  const fromUnformatted = format(
-    ["### Example 1", "```prisma", UNFORMATTED_FIXTURE, "```"].join("\n"),
-    { plugins: [plugin], filepath: "./README.md" }
-  );
-
-  registerRawSnapshot(fromUnformatted);
-
-  expect(fromUnformatted).toMatchInlineSnapshot(`
+  expect(
+    formatWithPlugin(
+      ["### Example 1", "```prisma", UNFORMATTED_FIXTURE, "```"].join("\n"),
+      { filepath: "./README.md" }
+    )
+  ).toMatchInlineSnapshot(`
     ### Example 1
 
     \`\`\`prisma
@@ -167,6 +166,46 @@ test("markdown", () => {
       Profile Profile?
     }
     \`\`\`
+
+  `);
+});
+
+test("tabWidth", () => {
+  expect(formatWithPlugin(UNFORMATTED_FIXTURE, { tabWidth: 4 }))
+    .toMatchInlineSnapshot(`
+    generator client {
+        provider = "prisma-client-js"
+    }
+
+    datasource db {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+    }
+
+    model Post {
+        id        Int      @id @default(autoincrement())
+        createdAt DateTime @default(now())
+        title     String
+        content   String?
+        published Boolean  @default(false)
+        User      User     @relation(fields: [authorId], references: [id])
+        authorId  Int
+    }
+
+    model Profile {
+        id     Int     @id @default(autoincrement())
+        bio    String?
+        User   User    @relation(fields: [userId], references: [id])
+        userId Int     @unique
+    }
+
+    model User {
+        id      Int      @id @default(autoincrement())
+        email   String   @unique
+        name    String?
+        Post    Post[]
+        Profile Profile?
+    }
 
   `);
 });
