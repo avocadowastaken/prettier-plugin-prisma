@@ -28,7 +28,7 @@
     "@prisma/prisma-fmt-wasm": "3.10.0-50.73e60b76d394f8d37d8ebd1f8918c79029f0db86"
   },
   "devDependencies": {
-    "@types/jest": "27.4.0",
+    "@types/jest": "27.4.1",
     "@types/prettier": "2.4.4",
     "@umidbekk/configs": "0.1.0",
     "husky": "7.0.4",
