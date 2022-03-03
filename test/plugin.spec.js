@@ -36,13 +36,14 @@ test("basic", () => {
     }
 
     model Post {
-      id        Int      @id @default(autoincrement())
-      createdAt DateTime @default(now())
+      id        Int       @id @default(autoincrement())
+      createdAt DateTime  @default(now())
       title     String
       content   String?
-      published Boolean  @default(false)
-      User      User     @relation(fields: [authorId], references: [id])
+      published Boolean   @default(false)
+      User      User      @relation(fields: [authorId], references: [id])
       authorId  Int
+      Comment   Comment[]
     }
 
     model Profile {
@@ -53,11 +54,21 @@ test("basic", () => {
     }
 
     model User {
-      id      Int      @id @default(autoincrement())
-      email   String   @unique
+      id      Int       @id @default(autoincrement())
+      email   String    @unique
       name    String?
       Post    Post[]
       Profile Profile?
+      Comment Comment[]
+    }
+
+    model Comment {
+      id      Int    @id @default(autoincrement())
+      content String
+      author  User   @relation(fields: [userId], references: [id])
+      post    Post   @relation(fields: [postId], references: [id])
+      userId  Int
+      postId  Int
     }
 
   `);
@@ -96,13 +107,14 @@ test("markdown", () => {
     }
 
     model Post {
-      id        Int      @id @default(autoincrement())
-      createdAt DateTime @default(now())
+      id        Int       @id @default(autoincrement())
+      createdAt DateTime  @default(now())
       title     String
       content   String?
-      published Boolean  @default(false)
-      User      User     @relation(fields: [authorId], references: [id])
+      published Boolean   @default(false)
+      User      User      @relation(fields: [authorId], references: [id])
       authorId  Int
+      Comment   Comment[]
     }
 
     model Profile {
@@ -113,11 +125,21 @@ test("markdown", () => {
     }
 
     model User {
-      id      Int      @id @default(autoincrement())
-      email   String   @unique
+      id      Int       @id @default(autoincrement())
+      email   String    @unique
       name    String?
       Post    Post[]
       Profile Profile?
+      Comment Comment[]
+    }
+
+    model Comment {
+      id      Int    @id @default(autoincrement())
+      content String
+      author  User   @relation(fields: [userId], references: [id])
+      post    Post   @relation(fields: [postId], references: [id])
+      userId  Int
+      postId  Int
     }
     \`\`\`
 
@@ -142,13 +164,14 @@ test("markdown", () => {
     }
 
     model Post {
-      id        Int      @id @default(autoincrement())
-      createdAt DateTime @default(now())
+      id        Int       @id @default(autoincrement())
+      createdAt DateTime  @default(now())
       title     String
       content   String?
-      published Boolean  @default(false)
-      User      User     @relation(fields: [authorId], references: [id])
+      published Boolean   @default(false)
+      User      User      @relation(fields: [authorId], references: [id])
       authorId  Int
+      Comment   Comment[]
     }
 
     model Profile {
@@ -159,11 +182,21 @@ test("markdown", () => {
     }
 
     model User {
-      id      Int      @id @default(autoincrement())
-      email   String   @unique
+      id      Int       @id @default(autoincrement())
+      email   String    @unique
       name    String?
       Post    Post[]
       Profile Profile?
+      Comment Comment[]
+    }
+
+    model Comment {
+      id      Int    @id @default(autoincrement())
+      content String
+      author  User   @relation(fields: [userId], references: [id])
+      post    Post   @relation(fields: [postId], references: [id])
+      userId  Int
+      postId  Int
     }
     \`\`\`
 
@@ -183,13 +216,14 @@ test("tabWidth", () => {
     }
 
     model Post {
-        id        Int      @id @default(autoincrement())
-        createdAt DateTime @default(now())
+        id        Int       @id @default(autoincrement())
+        createdAt DateTime  @default(now())
         title     String
         content   String?
-        published Boolean  @default(false)
-        User      User     @relation(fields: [authorId], references: [id])
+        published Boolean   @default(false)
+        User      User      @relation(fields: [authorId], references: [id])
         authorId  Int
+        Comment   Comment[]
     }
 
     model Profile {
@@ -200,11 +234,21 @@ test("tabWidth", () => {
     }
 
     model User {
-        id      Int      @id @default(autoincrement())
-        email   String   @unique
+        id      Int       @id @default(autoincrement())
+        email   String    @unique
         name    String?
         Post    Post[]
         Profile Profile?
+        Comment Comment[]
+    }
+
+    model Comment {
+        id      Int    @id @default(autoincrement())
+        content String
+        author  User   @relation(fields: [userId], references: [id])
+        post    Post   @relation(fields: [postId], references: [id])
+        userId  Int
+        postId  Int
     }
 
   `);

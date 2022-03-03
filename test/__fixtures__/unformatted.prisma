@@ -30,3 +30,10 @@ name String?
 Post Post[]
 Profile Profile?
 }
+
+model Comment {
+id Int @default(autoincrement()) @id
+content String
+author User
+post Post
+}
