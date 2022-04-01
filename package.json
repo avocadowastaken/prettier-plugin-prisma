@@ -33,7 +33,7 @@
     "@umidbekk/configs": "0.1.0",
     "husky": "7.0.4",
     "jest": "27.5.1",
-    "lint-staged": "12.3.6",
+    "lint-staged": "12.3.7",
     "np": "7.6.0",
     "prettier": "2.6.0",
     "prettier-plugin-packagejson": "2.2.16",
