@@ -25,15 +25,15 @@
     "*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
-    "@prisma/prisma-fmt-wasm": "3.12.0-37.22b822189f46ef0dc5c5b503368d1bee01213980"
+    "@prisma/prisma-fmt-wasm": "3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b"
   },
   "devDependencies": {
     "@types/jest": "27.4.1",
-    "@types/prettier": "2.4.4",
-    "@umidbekk/configs": "0.1.0",
+    "@types/prettier": "2.6.0",
+    "@umidbekk/configs": "0.2.0",
     "husky": "7.0.4",
-    "jest": "27.5.1",
-    "lint-staged": "12.3.7",
+    "jest": "28.0.1",
+    "lint-staged": "12.4.1",
     "np": "7.6.1",
     "prettier": "2.6.2",
     "prettier-plugin-packagejson": "2.2.17",
