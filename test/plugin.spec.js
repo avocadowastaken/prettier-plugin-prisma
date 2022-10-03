@@ -11,13 +11,15 @@ const UNFORMATTED_FIXTURE = fs.readFileSync(
 
 /**
  * @param {string} text
- * @param {Omit<import("prettier").Options, "plugins">} [options]
+ * @param {import("prettier").Options} [options]
  */
-function formatWithPlugin(
-  text,
-  { filepath = "./prisma/schema.prisma", ...options } = {}
-) {
-  const formatted = format(text, { ...options, filepath, plugins: [plugin] });
+function formatWithPlugin(text, options = {}) {
+  const {
+    plugins = [plugin],
+    filepath = "./prisma/schema.prisma",
+    ...restOptions
+  } = options;
+  const formatted = format(text, { ...restOptions, plugins, filepath });
   registerRawSnapshot(formatted);
   return formatted;
 }
