@@ -25,7 +25,7 @@
     "*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
-    "@prisma/prisma-fmt-wasm": "4.5.0-44.integration-fix-15655-cd15cc453ecedba322f3bb6dff831b949e0dd170"
+    "@prisma/prisma-fmt-wasm": "4.6.0-53.2e719efb80b56a3f32d18a62489de95bb9c130e3"
   },
   "devDependencies": {
     "@types/jest": "29.2.4",
