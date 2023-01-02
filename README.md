@@ -15,6 +15,11 @@ npm i -D prettier-plugin-prisma
 yarn add -D prettier-plugin-prisma
 ```
 
+### Feature requests
+
+This library is built on top of official [prisma-fmt-wasm](https://github.com/prisma/prisma-engines/tree/main/prisma-fmt-wasm),
+and all new features are developed there: https://github.com/prisma/prisma-engines/issues?q=fmt
+
 ### Supported options
 
 - Tab width: https://prettier.io/docs/en/options.html#tab-width
