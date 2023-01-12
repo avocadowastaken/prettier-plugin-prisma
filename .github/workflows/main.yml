@@ -8,12 +8,15 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   checks:
     runs-on: ubuntu-latest
     steps:
       - uses: umidbekk/actions/prepare-node-repo@v2
-
       - run: npm run lint
       - run: npx tsc
 
