@@ -17,8 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: umidbekk/actions/prepare-node-repo@v2
-      - run: npm run lint
-      - run: npx tsc
+      - run: npm run checks
 
   tests:
     runs-on: ${{ matrix.os }}

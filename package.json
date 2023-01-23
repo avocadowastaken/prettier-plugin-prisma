@@ -14,10 +14,10 @@
     "lib"
   ],
   "scripts": {
+    "checks": "npm run lint && npx tsc && npm test",
     "lint": "prettier . --check",
     "prepare": "husky install",
-    "prerelease": "npm ci && npm run lint && npx tsc",
-    "release": "np",
+    "release": "np --test-script checks",
     "tdd": "jest --watch",
     "test": "jest"
   },
@@ -25,7 +25,7 @@
     "*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
-    "@prisma/prisma-fmt-wasm": "4.8.0-62.351fb726ff78e50c7d6db6331d66d4db0e378c53"
+    "@prisma/prisma-fmt-wasm": "4.9.0-44.b29121153404aa8eda60ec38e41e477cc1c0ee66"
   },
   "devDependencies": {
     "@types/jest": "29.2.6",
