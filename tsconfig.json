@@ -1,7 +1,4 @@
 {
   "extends": "@umidbekk/configs/tsconfig.json",
-  "include": ["lib", "test", "scripts"],
-  "compilerOptions": {
-    "ignoreDeprecations": "5.0"
-  }
+  "include": ["lib", "test", "scripts"]
 }
