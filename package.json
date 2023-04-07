@@ -36,7 +36,7 @@
     "lint-staged": "13.2.0",
     "prettier": "2.8.7",
     "prettier-plugin-packagejson": "2.4.3",
-    "typescript": "5.0.2",
+    "typescript": "5.0.4",
     "vscode-languageserver-protocol": "3.17.3"
   },
   "peerDependencies": {
