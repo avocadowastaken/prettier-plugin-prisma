@@ -6,26 +6,26 @@ const registerRawSnapshot = require("../test/__testutils__/rawSerializer");
 
 const UNFORMATTED_FIXTURE = fs.readFileSync(
   path.join(__dirname, "__fixtures__", "unformatted.prisma"),
-  "utf8"
+  "utf8",
 );
 
 /**
  * @param {string} text
  * @param {import("prettier").Options} [options]
  */
-function formatWithPlugin(text, options = {}) {
+async function formatWithPlugin(text, options = {}) {
   const {
     plugins = [plugin],
     filepath = "./prisma/schema.prisma",
     ...restOptions
   } = options;
-  const formatted = format(text, { ...restOptions, plugins, filepath });
+  const formatted = await format(text, { ...restOptions, plugins, filepath });
   registerRawSnapshot(formatted);
   return formatted;
 }
 
-test("basic", () => {
-  const formatted = formatWithPlugin(UNFORMATTED_FIXTURE);
+test("basic", async () => {
+  const formatted = await formatWithPlugin(UNFORMATTED_FIXTURE);
 
   expect(formatted).toMatchInlineSnapshot(`
     generator client {
@@ -75,27 +75,27 @@ test("basic", () => {
 
   `);
 
-  expect(
+  await expect(
     check(UNFORMATTED_FIXTURE, {
       plugins: [plugin],
       filepath: "./prisma/schema.prisma",
-    })
-  ).toBe(false);
+    }),
+  ).resolves.toBe(false);
 
-  expect(
-    check(formatted, { plugins: [plugin], filepath: "./prisma/schema.prisma" })
-  ).toBe(true);
+  await expect(
+    check(formatted, { plugins: [plugin], filepath: "./prisma/schema.prisma" }),
+  ).resolves.toBe(true);
 
-  expect(formatWithPlugin(formatted)).toBe(formatted);
+  await expect(formatWithPlugin(formatted)).resolves.toBe(formatted);
 });
 
-test("markdown", () => {
-  expect(
+test("markdown", async () => {
+  await expect(
     formatWithPlugin(
       ["### Example 1", "```prisma", UNFORMATTED_FIXTURE, "```"].join("\n"),
-      { filepath: "./README.md" }
-    )
-  ).toMatchInlineSnapshot(`
+      { filepath: "./README.md" },
+    ),
+  ).resolves.toMatchInlineSnapshot(`
     ### Example 1
 
     \`\`\`prisma
@@ -147,12 +147,12 @@ test("markdown", () => {
 
   `);
 
-  expect(
+  await expect(
     formatWithPlugin(
       ["### Example 1", "```prisma", UNFORMATTED_FIXTURE, "```"].join("\n"),
-      { filepath: "./README.md" }
-    )
-  ).toMatchInlineSnapshot(`
+      { filepath: "./README.md" },
+    ),
+  ).resolves.toMatchInlineSnapshot(`
     ### Example 1
 
     \`\`\`prisma
@@ -205,8 +205,8 @@ test("markdown", () => {
   `);
 });
 
-test("tabWidth", () => {
-  expect(formatWithPlugin(UNFORMATTED_FIXTURE, { tabWidth: 4 }))
+test("tabWidth", async () => {
+  await expect(formatWithPlugin(UNFORMATTED_FIXTURE, { tabWidth: 4 })).resolves
     .toMatchInlineSnapshot(`
     generator client {
         provider = "prisma-client-js"
