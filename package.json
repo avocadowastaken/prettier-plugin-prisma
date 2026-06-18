@@ -6,7 +6,7 @@
     "prettier-plugin",
     "prisma"
   ],
-  "repository": "git@github.com:umidbekk/prettier-plugin-prisma.git",
+  "repository": "git+https://github.com/avocadowastaken/prettier-plugin-prisma.git",
   "license": "MIT",
   "author": "Umidbek Karimov",
   "main": "lib/plugin.js",
